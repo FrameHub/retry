@@ -62,7 +62,10 @@ async function retry(validator, {
 	} while (times <= retries && !result)
 
 	if (result) {
-		return `[Retry] tried ${times} time(s) and succeeded`
+		// debug
+		if (debug) console.log(`[Retry] tried ${times} time(s) and succeeded`)
+
+		return result
 	} else {
 		throw new Error(`[Retry] tried ${times} time(s) and failed`)
 	}
