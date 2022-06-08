@@ -5,18 +5,18 @@ function _sleep(time) {
 }
 /**
  *
- * @param {function} fn 函数或异步函数，检查器，判断是否满足检查条件
+ * @param {function} validator 函数或异步函数，检查器，判断是否满足检查条件
  * @param {object} param1 重试参数
  * - retries - {Number} 最大重试次数，默认5次
  * - timeout - {Number} 重试间隔(毫秒)，默认10秒
  */
-module.exports = async function retry(fn, {
+module.exports = async function retry(validator, {
 	retries = 5,
 	timeout = 10000,
 } = {}) {
 
-	if (typeof fn !== 'function') {
-		throw Error('fn is not a function')
+	if (typeof validator !== 'function') {
+		throw Error('validator is not a function')
 	}
 	if (!Number.isInteger(retries)) {
 		throw Error('retries parameter type must be integer')
@@ -34,16 +34,12 @@ module.exports = async function retry(fn, {
 	let times = 0
 	let result
 	do {
-		result = await fn()
+		result = await validator()
 		times++
 		await _sleep(timeout)
 	} while (times <= retries && !result)
 
-	return new Promise((resolve, reject) => {
-		if (result) {
-			resolve(console.log('retrying successed'))
-		} else {
-			reject(new Error('retrying failed'))
-		}
-	})
+	if (!result) {
+		return new Error('retrying failed')
+	}
 }
