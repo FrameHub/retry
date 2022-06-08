@@ -46,6 +46,7 @@ describe('retry()', () => {
 			}, {
 				retries: 1,
 				timeout: 0,
+				debug: true,
 			})).resolves.toBeTruthy()
 		})
 		test('if `validator` returns false', async () => {
@@ -55,6 +56,7 @@ describe('retry()', () => {
 			}, {
 				retries: 1,
 				timeout: 0,
+				debug: true,
 			})).rejects.toThrow()
 		})
 	})
