@@ -39,7 +39,9 @@ module.exports = async function retry(validator, {
 		await _sleep(timeout)
 	} while (times <= retries && !result)
 
-	if (!result) {
-		return new Error('retrying failed')
+	if (result) {
+		return 'retrying successed'
+	} else {
+		throw new Error('retrying failed')
 	}
 }
