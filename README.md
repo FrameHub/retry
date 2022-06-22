@@ -1,2 +1,3 @@
-# ss-retry
-A "Simple and Stupid" retry function.
+# Retry
+
+> A "Simple and Stupid" retry function.
