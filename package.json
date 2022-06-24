@@ -1,13 +1,32 @@
 {
-	"private": true,
+	"name": "@framehub/retry",
+	"version": "0.0.0",
+	"description": "ESA \"Simple and Stupid\" retry function.",
+	"main": "src/retry.js",
 	"scripts": {
+		"postpublish": "npx npm-mirror-sync",
 		"test": "jest --watch"
 	},
+	"repository": "FrameHub/retry",
+	"keywords": [
+		"retry"
+	],
+	"contributors": [
+		"cssmagic <cssmagic.cn@gmail.com>",
+		"WilberJiang"
+	],
+	"license": "MIT",
 	"dependencies": {},
 	"devDependencies": {
 		"@babel/core": "^7.13.1",
 		"@babel/preset-env": "^7.13.5",
 		"babel-jest": "^26.6.3",
 		"jest": "^26.6.3"
+	},
+	"files": [
+		"src/**/*.js"
+	],
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/"
 	}
 }
