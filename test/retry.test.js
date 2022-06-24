@@ -8,33 +8,33 @@ describe('retry()', () => {
 			expect.assertions(1)
 			await expect(retry()).rejects.toThrow(MSG.ARG_VALIDATOR__FN)
 		})
-		test('quit if `retries` is not an integer', async () => {
+		test('quit if `attempts` is not an integer', async () => {
 			expect.assertions(1)
 			await expect(retry(function () {}, {
-				retries: 1.1,
-				timeout: 0,
-			})).rejects.toThrow(MSG.ARG_RETRIES__INT)
+				attempts: 1.1,
+				interval: 0,
+			})).rejects.toThrow(MSG.ARG_ATTEMPTS__INT)
 		})
-		test('quit if `retries` < 0', async () => {
+		test('quit if `attempts` < 0', async () => {
 			expect.assertions(1)
 			await expect(retry(function () {}, {
-				retries: -1,
-				timeout: 0,
-			})).rejects.toThrow(MSG.ARG_RETRIES__POS)
+				attempts: -1,
+				interval: 0,
+			})).rejects.toThrow(MSG.ARG_ATTEMPTS__POS)
 		})
-		test('quit if `timeout` is not a number', async () => {
+		test('quit if `interval` is not a number', async () => {
 			expect.assertions(1)
 			await expect(retry(function () {}, {
-				retries: 1,
-				timeout: 'asd',
-			})).rejects.toThrow(MSG.ARG_TIMEOUT__NUM)
+				attempts: 1,
+				interval: 'asd',
+			})).rejects.toThrow(MSG.ARG_INTERVAL__NUM)
 		})
-		test('quit if `timeout` < 0', async () => {
+		test('quit if `interval` < 0', async () => {
 			expect.assertions(1)
 			await expect(retry(function () {}, {
-				retries: 1,
-				timeout: -123,
-			})).rejects.toThrow(MSG.ARG_TIMEOUT__POS)
+				attempts: 1,
+				interval: -123,
+			})).rejects.toThrow(MSG.ARG_INTERVAL__POS)
 		})
 	})
 
@@ -44,8 +44,8 @@ describe('retry()', () => {
 			await expect(retry(function () {
 				return true
 			}, {
-				retries: 1,
-				timeout: 0,
+				attempts: 1,
+				interval: 0,
 				debug: true,
 			})).resolves.toBeTruthy()
 		})
@@ -54,8 +54,8 @@ describe('retry()', () => {
 			await expect(retry(function () {
 				return false
 			}, {
-				retries: 1,
-				timeout: 0,
+				attempts: 1,
+				interval: 0,
 				debug: true,
 			})).rejects.toThrow()
 		})
