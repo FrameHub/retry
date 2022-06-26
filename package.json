@@ -1,7 +1,7 @@
 {
 	"name": "@framehub/retry",
-	"version": "0.0.0",
-	"description": "ESA \"Simple and Stupid\" retry function.",
+	"version": "0.1.0",
+	"description": "A \"Simple and Stupid\" retry function.",
 	"main": "src/retry.js",
 	"scripts": {
 		"postpublish": "npx npm-mirror-sync",
