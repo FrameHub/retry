@@ -53,13 +53,15 @@ async function retry(validator, {
 	let result
 	do {
 		result = await validator()
-		times++
-		await _sleep(interval)
-
 		// debug
 		if (debug) console.log(`[Retry] trying "${name}" #${times} and get result:`, result)
 
-	} while (times <= attempts && !result)
+		if (result) break
+
+		times++
+		await _sleep(interval)
+
+	} while (times <= attempts)
 
 	if (result) {
 		// debug
